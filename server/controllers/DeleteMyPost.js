@@ -1,5 +1,5 @@
-const { post } = require("../models");
 const { isAuthorized } = require("./tokenFunction");
+const { post } = require("../models");
 
 module.exports = {
   deleteMyPost: (req, res) => {
@@ -10,13 +10,13 @@ module.exports = {
       return res.status(401).json({ message: "invalid access token" });
     } else {
       post
-        .delete({
+        .destroy({
           where: {
             id: post_id,
           },
         })
         .then((data) => {
-          return res.status(200).json({ message: "ok" });
+          return res.status(200).json({ message: "successfully deleted" });
         })
         .catch((err) => {
           console.log(err);
